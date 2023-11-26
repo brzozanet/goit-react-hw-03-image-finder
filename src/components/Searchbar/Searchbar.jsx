@@ -4,10 +4,6 @@ export const Searchbar = () => {
   return (
     <header className={css.searchbar}>
       <form className={css.form}>
-        <button type="submit" className={css.button}>
-          <span className={css["button-label"]}>Search</span>
-        </button>
-
         <input
           className={css.input}
           type="text"
@@ -15,6 +11,9 @@ export const Searchbar = () => {
           autofocus
           placeholder="Search images and photos"
         />
+        <button type="submit" className={css.button}>
+          <span className={css["button-label"]}>Search</span>
+        </button>
       </form>
     </header>
   );
