@@ -1,20 +1,23 @@
 import css from "./Searchbar.module.css";
+import PropTypes from "prop-types";
 
-export const Searchbar = () => {
+export const Searchbar = ({ handleSearch }) => {
   return (
     <header className={css.searchbar}>
-      <form className={css.form}>
-        <input
-          className={css.input}
-          type="text"
-          autocomplete="off"
-          autofocus
-          placeholder="Search images and photos"
-        />
-        <button type="submit" className={css.button}>
-          <span className={css["button-label"]}>Search</span>
-        </button>
-      </form>
+      <input
+        className={css.input}
+        type="text"
+        placeholder="Search images and photos"
+        onKeyUp={event => {
+          if (event.code === "Enter") {
+            handleSearch(event.target.value);
+          }
+        }}
+      />
     </header>
   );
+};
+
+Searchbar.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
 };
