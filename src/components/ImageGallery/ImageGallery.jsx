@@ -1,9 +1,16 @@
-import css from "./ImageGallery.module.css";
+// import css from "./ImageGallery.module.css";
+import { Component } from "react";
 
-export const ImageGallery = () => {
-  return (
-    <ul className={css.gallery}>
-      <li>lista obrazów</li>
-    </ul>
-  );
-};
+// export const ImageGallery = () => {
+//   return (
+//     <ul className={css.gallery}>
+//       <li>{JSON.stringify(this.props.data)}</li>
+//     </ul>
+//   );
+// };
+
+export class ImageGallery extends Component {
+  render() {
+    return <div>{JSON.stringify(this.props.data)}</div>;
+  }
+}
