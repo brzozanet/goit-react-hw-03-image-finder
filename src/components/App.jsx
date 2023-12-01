@@ -18,7 +18,7 @@ export class App extends Component {
     try {
       const photos = await getPhotos(query);
       this.setState({
-        photos,
+        photos: JSON.stringify(photos),
       });
       console.log(query);
       console.log(photos);

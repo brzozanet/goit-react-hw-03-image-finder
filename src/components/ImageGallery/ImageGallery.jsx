@@ -11,6 +11,6 @@ import { Component } from "react";
 
 export class ImageGallery extends Component {
   render() {
-    return <div>{JSON.stringify(this.props.data)}</div>;
+    return <div>{this.props.data}</div>;
   }
 }
