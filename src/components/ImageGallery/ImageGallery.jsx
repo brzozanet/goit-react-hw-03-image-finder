@@ -1,5 +1,6 @@
 // import css from "./ImageGallery.module.css";
 import { Component } from "react";
+import PropTypes from "prop-types";
 
 // export const ImageGallery = () => {
 //   return (
@@ -11,6 +12,16 @@ import { Component } from "react";
 
 export class ImageGallery extends Component {
   render() {
-    return <div>{this.props.data}</div>;
+    return (
+      <div>
+        {this.props.data.map(photo => (
+          <div>{photo.webformatURL}</div>
+        ))}
+      </div>
+    );
   }
 }
+
+ImageGallery.propTypes = {
+  data: PropTypes.string.isRequired,
+};
