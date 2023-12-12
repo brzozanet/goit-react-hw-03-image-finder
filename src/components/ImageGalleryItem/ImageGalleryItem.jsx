@@ -1,9 +1,12 @@
+import { Component } from "react";
 import css from "./ImageGalleryItem.module.css";
 
-export const ImageGalleryItem = () => {
-  return (
-    <li className={css["gallery-item"]}>
-      <img src="" alt="" />
-    </li>
-  );
-};
+export class ImageGalleryItem extends Component {
+  render() {
+    return (
+      <div>
+        <p>Photo tags: {this.props.tags}</p>
+      </div>
+    );
+  }
+}

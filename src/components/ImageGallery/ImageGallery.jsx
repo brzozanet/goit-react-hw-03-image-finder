@@ -1,6 +1,7 @@
-// import css from "./ImageGallery.module.css";
 import { Component } from "react";
+import { ImageGalleryItem } from "components/ImageGalleryItem";
 import PropTypes from "prop-types";
+// import css from "./ImageGallery.module.css";
 
 // export const ImageGallery = () => {
 //   return (
@@ -15,7 +16,7 @@ export class ImageGallery extends Component {
     return (
       <div>
         {this.props.data.map(photo => (
-          <div>{photo.webformatURL}</div>
+          <ImageGalleryItem tags={photo.tags} />
         ))}
       </div>
     );
@@ -23,5 +24,5 @@ export class ImageGallery extends Component {
 }
 
 ImageGallery.propTypes = {
-  data: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
 };

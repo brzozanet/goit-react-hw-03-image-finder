@@ -1,9 +1,8 @@
-// import css from "./App.module.css";
 import { Component } from "react";
 import { ImageGallery } from "./ImageGallery";
 import { Searchbar } from "./Searchbar/Searchbar";
-
 import { getPhotos } from "../services/pixabayAPI";
+// import css from "./App.module.css";
 
 export class App extends Component {
   state = {
@@ -18,7 +17,7 @@ export class App extends Component {
     try {
       const photos = await getPhotos(query);
       this.setState({
-        photos: JSON.stringify(photos),
+        photos,
       });
       console.log(query);
       console.log(photos);
