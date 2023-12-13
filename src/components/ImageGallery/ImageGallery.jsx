@@ -14,11 +14,11 @@ import PropTypes from "prop-types";
 export class ImageGallery extends Component {
   render() {
     return (
-      <div>
+      <ul>
         {this.props.data.map(photo => (
-          <ImageGalleryItem tags={photo.tags} />
+          <ImageGalleryItem key={photo.id} imgSrc={photo.webformatURL} />
         ))}
-      </div>
+      </ul>
     );
   }
 }

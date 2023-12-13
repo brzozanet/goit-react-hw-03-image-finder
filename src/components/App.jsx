@@ -17,6 +17,7 @@ export class App extends Component {
   handleSearch = async query => {
     try {
       const photos = await getPhotos(query);
+      // debugger;
       this.setState({
         photos,
       });
