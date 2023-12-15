@@ -12,9 +12,9 @@ export class ImageGalleryItem extends Component {
   }
 }
 
-// ImageGalleryItem.defaultProps ={
-//   imgSrc: "";
-// }
+ImageGalleryItem.defaultProps = {
+  imgSrc: "https://placehold.co/600x400",
+};
 
 ImageGalleryItem.propTypes = {
   imgSrc: PropTypes.string.isRequired,
