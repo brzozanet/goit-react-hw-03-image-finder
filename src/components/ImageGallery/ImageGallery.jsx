@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { ImageGalleryItem } from "components/ImageGalleryItem";
 import PropTypes from "prop-types";
-// import css from "./ImageGallery.module.css";
+import css from "./ImageGallery.module.css";
 
 // export const ImageGallery = () => {
 //   return (
@@ -14,9 +14,13 @@ import PropTypes from "prop-types";
 export class ImageGallery extends Component {
   render() {
     return (
-      <ul>
+      <ul className={css.ImageGallery}>
         {this.props.data.map(photo => (
-          <ImageGalleryItem key={photo.id} imgSrc={photo.webformatURL} />
+          <ImageGalleryItem
+            key={photo.id}
+            imgSrc={photo.webformatURL}
+            tags={photo.tags}
+          />
         ))}
       </ul>
     );

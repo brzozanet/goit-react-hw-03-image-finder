@@ -4,10 +4,10 @@ import pixabayLogo from "../../images/pixabay.svg";
 
 export const Searchbar = ({ handleSearch }) => {
   return (
-    <header className={css.searchbar}>
+    <header className={css.Searchbar}>
       <img src={pixabayLogo} alt="pixabay" height="40" />
       <input
-        className={css.input}
+        className={css.Input}
         type="text"
         placeholder="Search images and photos..."
         onKeyUp={event => {

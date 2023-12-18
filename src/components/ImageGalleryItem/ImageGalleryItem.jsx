@@ -1,12 +1,17 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
-// import css from "./ImageGalleryItem.module.css";
+import css from "./ImageGalleryItem.module.css";
 
 export class ImageGalleryItem extends Component {
   render() {
     return (
-      <li>
-        <img src={this.props.imgSrc} alt="" />
+      <li className={css.ImageGalleryItem}>
+        <img
+          src={this.props.imgSrc}
+          alt={this.props.tags}
+          title={this.props.tags}
+          className={css.ImageGalleryItemImage}
+        />
       </li>
     );
   }
