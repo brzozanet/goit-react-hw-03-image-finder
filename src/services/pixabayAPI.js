@@ -22,3 +22,12 @@ export const getPhotos = async query => {
 //   const response = await axios.get(url);
 //   return response.data.hits;
 // };
+
+// export const getPhotos = async query => {
+//   const url =
+//     Math.random() > 0.5
+//       ? `${BASE_URL}?q=${query}&key=${API_KEY}&page=${PAGE}&per_page=${IMG_PER_PAGE}`
+//       : "badURL";
+//   const response = await axios.get(url);
+//   return response.data.hits;
+// };

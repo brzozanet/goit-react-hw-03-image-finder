@@ -9,11 +9,16 @@ export class App extends Component {
   state = {
     photos: [],
     isLoading: false,
+    errorMessage: "",
   };
+
   // constructor(props) {
   //   super(props);
   //   this.handleSearch = this.handleSearch.bind(this);
-  //
+  // }
+
+  // componentDidMount() {
+  //   this.handleSearch("random");
   // }
 
   handleSearch = async query => {
@@ -21,6 +26,7 @@ export class App extends Component {
       this.setState({
         isLoading: true,
         photos: [],
+        errorMessage: "",
       });
       const photos = await getPhotos(query);
       this.setState({
@@ -29,7 +35,7 @@ export class App extends Component {
       console.log(query);
       console.log(photos);
     } catch (error) {
-      console.error(`Wystąpił błąd: ${error}`);
+      this.setState({ errorMessage: error.message });
     } finally {
       this.setState({
         isLoading: false,
@@ -42,7 +48,8 @@ export class App extends Component {
       <>
         <Searchbar handleSearch={this.handleSearch} />
         {this.state.isLoading && <Loader />}
-        <ImageGallery data={this.state.photos} />
+        {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
+        {!this.state.errorMessage && <ImageGallery data={this.state.photos} />}
       </>
     );
   }
