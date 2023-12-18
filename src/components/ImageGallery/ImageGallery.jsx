@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { ImageGalleryItem } from "components/ImageGalleryItem";
+import { Button } from "../Button/Button";
 import PropTypes from "prop-types";
 import css from "./ImageGallery.module.css";
 
@@ -14,15 +15,18 @@ import css from "./ImageGallery.module.css";
 export class ImageGallery extends Component {
   render() {
     return (
-      <ul className={css.ImageGallery}>
-        {this.props.data.map(photo => (
-          <ImageGalleryItem
-            key={photo.id}
-            imgSrc={photo.webformatURL}
-            tags={photo.tags}
-          />
-        ))}
-      </ul>
+      <>
+        <ul className={css.ImageGallery}>
+          {this.props.data.map(photo => (
+            <ImageGalleryItem
+              key={photo.id}
+              imgSrc={photo.webformatURL}
+              tags={photo.tags}
+            />
+          ))}
+        </ul>
+        <Button />
+      </>
     );
   }
 }
