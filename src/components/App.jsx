@@ -18,7 +18,7 @@ export class App extends Component {
   // }
 
   // componentDidMount() {
-  //   this.handleSearch("random");
+  //   this.handleSearch("random photo");
   // }
 
   handleSearch = async query => {
