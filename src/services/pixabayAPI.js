@@ -5,7 +5,7 @@ const API_KEY = "8543283-ac41910cbcd5ccb3a6a09e0db";
 const PAGE = 1;
 const IMG_PER_PAGE = 15;
 
-const FETCH_DELAY = 3000;
+const FETCH_DELAY = 2000;
 
 export const getPhotos = async query => {
   return new Promise(res => {
