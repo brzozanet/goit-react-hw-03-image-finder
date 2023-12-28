@@ -10,8 +10,7 @@ export class App extends Component {
     photos: [],
     isLoading: false,
     errorMessage: "",
-    // currentPage: 0,
-    // totalPages: 0,
+    imagePerPage: 15,
   };
 
   // constructor(props) {
@@ -26,7 +25,7 @@ export class App extends Component {
         photos: [],
         errorMessage: "",
       });
-      const photos = await getPhotos(query);
+      const photos = await getPhotos(query, this.state.imagePerPage);
       this.setState({
         photos,
       });
@@ -42,22 +41,19 @@ export class App extends Component {
     }
   };
 
-  // loadMorePhotos = () => {
-  //   this.setState(prevState => ({
-  //     currentPage: prevState.currentPage + 1,
-  //   }));
-  // };
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { searchQuery, currentPage } = this.state;
-
-  //   if (
-  //     searchQuery !== prevState.searchQuery ||
-  //     currentPage !== prevState.currentPage
-  //   ) {
-  //     this.getPhotos();
-  //   }
-  // }
+  loadMorePhotos = async query => {
+    try {
+      const photos = await getPhotos(query, this.state.imagePerPage);
+      this.setState({
+        photos,
+      });
+      return this.setState({ imagePerPage: this.state.imagePerPage + 15 });
+    } finally {
+      this.setState({
+        isLoading: false,
+      });
+    }
+  };
 
   render() {
     return (
@@ -66,12 +62,9 @@ export class App extends Component {
         {this.state.isLoading && <Loader />}
         {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
         {!this.state.errorMessage && <ImageGallery data={this.state.photos} />}
-        {this.state.photos.length !== 0 && <Button />}
-
-        {/* {this.state.photos.length !== 0 &&
-          this.state.currentPage !== this.state.totalPages && (
-            <Button loadMorePhotos={this.loadMorePhotos} />
-          )} */}
+        {this.state.photos.length !== 0 && (
+          <Button loadMorePhotos={this.loadMorePhotos} />
+        )}
       </>
     );
   }

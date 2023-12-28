@@ -3,27 +3,22 @@ import { ImageGalleryItem } from "components/ImageGalleryItem";
 import PropTypes from "prop-types";
 import css from "./ImageGallery.module.css";
 
-// export const ImageGallery = () => {
-//   return (
-//     <ul className={css.gallery}>
-//       <li>{JSON.stringify(this.props.data)}</li>
-//     </ul>
-//   );
-// };
-
 export class ImageGallery extends Component {
   render() {
+    const imageContent = (
+      <ul className={css.ImageGallery}>
+        {this.props.data.map(photo => (
+          <ImageGalleryItem
+            key={photo.id}
+            imgSrc={photo.webformatURL}
+            tags={photo.tags}
+          />
+        ))}
+      </ul>
+    );
     return (
       <>
-        <ul className={css.ImageGallery}>
-          {this.props.data.map(photo => (
-            <ImageGalleryItem
-              key={photo.id}
-              imgSrc={photo.webformatURL}
-              tags={photo.tags}
-            />
-          ))}
-        </ul>
+        {this.props.data.length === 0 ? <h3>No images found</h3> : imageContent}
       </>
     );
   }
