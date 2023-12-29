@@ -10,7 +10,7 @@ export class App extends Component {
     photos: [],
     isLoading: false,
     errorMessage: "",
-    imagePerPage: 15,
+    imagesPerPage: 15,
   };
 
   // constructor(props) {
@@ -25,7 +25,7 @@ export class App extends Component {
         photos: [],
         errorMessage: "",
       });
-      const photos = await getPhotos(query, this.state.imagePerPage);
+      const photos = await getPhotos(query, this.state.imagesPerPage);
       this.setState({
         photos,
       });
@@ -43,11 +43,11 @@ export class App extends Component {
 
   loadMorePhotos = async query => {
     try {
-      const photos = await getPhotos(query, this.state.imagePerPage);
+      const photos = await getPhotos(query, this.state.imagesPerPage);
       this.setState({
         photos,
       });
-      return this.setState({ imagePerPage: this.state.imagePerPage + 15 });
+      return this.setState({ imagesPerPage: this.state.imagesPerPage + 15 });
     } finally {
       this.setState({
         isLoading: false,
