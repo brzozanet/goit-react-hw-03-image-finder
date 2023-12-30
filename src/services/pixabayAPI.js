@@ -3,6 +3,7 @@ import Notiflix from "notiflix";
 
 const API_URL = "https://pixabay.com/api/?";
 const API_KEY = "8543283-ac41910cbcd5ccb3a6a09e0db";
+const IMG_PER_PAGE = 3;
 
 const createSearchParams = querySearch =>
   new URLSearchParams({
@@ -10,7 +11,7 @@ const createSearchParams = querySearch =>
     q: querySearch,
     image_type: "photo",
     page: 1,
-    per_page: 15,
+    per_page: IMG_PER_PAGE,
   });
 
 export const getPhotos = async querySearch => {

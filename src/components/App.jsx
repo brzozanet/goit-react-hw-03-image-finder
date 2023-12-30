@@ -8,9 +8,11 @@ import { Button } from "./Button/Button";
 export class App extends Component {
   state = {
     photos: [],
+    photosPerPage: 3,
+    page: 1,
     isLoading: false,
     errorMessage: "",
-    // imagesPerPage: 15,
+    querySearch: "", // Dodajemy pole do przechowywania aktualnego zapytania
   };
 
   handleSearch = async querySearch => {
@@ -19,12 +21,20 @@ export class App extends Component {
         isLoading: true,
         photos: [],
         errorMessage: "",
+        page: 1,
+        querySearch, // Aktualizujemy zapytanie w stanie
       });
-      const photos = await getPhotos(querySearch);
+
+      const photos = await getPhotos(
+        querySearch,
+        this.state.page,
+        this.state.photosPerPage
+      );
+
       this.setState({
         photos,
       });
-      // WARN: console.log
+
       console.log(querySearch);
       console.log(photos);
       console.log(photos.length);
@@ -37,13 +47,37 @@ export class App extends Component {
     }
   };
 
-  // loadMorePhotos = async query => {
-  //   const photos = await getPhotos(query, this.state.imagesPerPage);
-  //   this.setState({
-  //     photos,
-  //   });
-  //   return this.setState({ imagesPerPage: this.state.imagesPerPage + 15 });
-  // };
+  handleLoadMore = async () => {
+    try {
+      this.setState(
+        prevState => ({
+          isLoading: true,
+          errorMessage: "",
+        }),
+        async () => {
+          const { page, photosPerPage, querySearch } = this.state;
+          const nextPage = page + 1;
+
+          const morePhotos = await getPhotos(
+            querySearch,
+            nextPage,
+            photosPerPage
+          );
+
+          this.setState(prevState => ({
+            photos: [...prevState.photos, ...morePhotos],
+            page: nextPage,
+            isLoading: false,
+          }));
+
+          console.log(morePhotos);
+          console.log(morePhotos.length);
+        }
+      );
+    } catch (error) {
+      this.setState({ errorMessage: error.message, isLoading: false });
+    }
+  };
 
   render() {
     return (
@@ -53,7 +87,9 @@ export class App extends Component {
         {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
         {!this.state.errorMessage && <ImageGallery data={this.state.photos} />}
         {this.state.photos.length !== 0 && (
-          <Button loadMorePhotos={this.loadMorePhotos} />
+          <Button
+            handleLoadMore={() => this.handleLoadMore(this.state.querySearch)}
+          />
         )}
       </>
     );
