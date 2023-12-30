@@ -10,26 +10,22 @@ export class App extends Component {
     photos: [],
     isLoading: false,
     errorMessage: "",
-    imagesPerPage: 15,
+    // imagesPerPage: 15,
   };
 
-  // constructor(props) {
-  //   super(props);
-  //   this.handleSearch = this.handleSearch.bind(this);
-  // }
-
-  handleSearch = async query => {
+  handleSearch = async querySearch => {
     try {
       this.setState({
         isLoading: true,
         photos: [],
         errorMessage: "",
       });
-      const photos = await getPhotos(query, this.state.imagesPerPage);
+      const photos = await getPhotos(querySearch);
       this.setState({
         photos,
       });
-      console.log(query);
+      // WARN: console.log
+      console.log(querySearch);
       console.log(photos);
       console.log(photos.length);
     } catch (error) {
@@ -41,19 +37,13 @@ export class App extends Component {
     }
   };
 
-  loadMorePhotos = async query => {
-    try {
-      const photos = await getPhotos(query, this.state.imagesPerPage);
-      this.setState({
-        photos,
-      });
-      return this.setState({ imagesPerPage: this.state.imagesPerPage + 15 });
-    } finally {
-      this.setState({
-        isLoading: false,
-      });
-    }
-  };
+  // loadMorePhotos = async query => {
+  //   const photos = await getPhotos(query, this.state.imagesPerPage);
+  //   this.setState({
+  //     photos,
+  //   });
+  //   return this.setState({ imagesPerPage: this.state.imagesPerPage + 15 });
+  // };
 
   render() {
     return (
