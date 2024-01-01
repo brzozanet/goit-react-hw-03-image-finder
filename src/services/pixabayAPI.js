@@ -3,7 +3,7 @@ import Notiflix from "notiflix";
 
 const API_URL = "https://pixabay.com/api/?";
 const API_KEY = "8543283-ac41910cbcd5ccb3a6a09e0db";
-const IMG_PER_PAGE = 3;
+export const IMG_PER_PAGE = 3;
 
 const createSearchParams = querySearch =>
   new URLSearchParams({
@@ -14,9 +14,11 @@ const createSearchParams = querySearch =>
     per_page: IMG_PER_PAGE,
   });
 
-export const getPhotos = async querySearch => {
+// FIXME: argumenty do fukcji getPhotos
+export const getPhotos = async (querySearch, page = 1, photosPerPage = 3) => {
   try {
     const response = await axios.get(API_URL + createSearchParams(querySearch));
+
     if (response.data.hits.length === 0) {
       Notiflix.Notify.failure(
         "Sorry, there are no images matching your search query. Please try again."

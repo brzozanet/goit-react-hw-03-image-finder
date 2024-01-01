@@ -1,18 +1,18 @@
 import { Component } from "react";
 import { ImageGallery } from "./ImageGallery";
 import { Searchbar } from "./Searchbar/Searchbar";
-import { getPhotos } from "../services/pixabayAPI";
+import { getPhotos, IMG_PER_PAGE } from "../services/pixabayAPI";
 import { Loader } from "./Loader/Loader";
 import { Button } from "./Button/Button";
 
 export class App extends Component {
   state = {
     photos: [],
-    photosPerPage: 3,
+    photosPerPage: IMG_PER_PAGE,
     page: 1,
     isLoading: false,
     errorMessage: "",
-    querySearch: "", // Dodajemy pole do przechowywania aktualnego zapytania
+    querySearch: "",
   };
 
   handleSearch = async querySearch => {
@@ -22,7 +22,7 @@ export class App extends Component {
         photos: [],
         errorMessage: "",
         page: 1,
-        querySearch, // Aktualizujemy zapytanie w stanie
+        querySearch,
       });
 
       const photos = await getPhotos(
@@ -35,9 +35,9 @@ export class App extends Component {
         photos,
       });
 
+      // WARN: console.log
       console.log(querySearch);
       console.log(photos);
-      console.log(photos.length);
     } catch (error) {
       this.setState({ errorMessage: error.message });
     } finally {
@@ -53,29 +53,30 @@ export class App extends Component {
         prevState => ({
           isLoading: true,
           errorMessage: "",
+          page: prevState.page + 1,
         }),
         async () => {
-          const { page, photosPerPage, querySearch } = this.state;
-          const nextPage = page + 1;
-
           const morePhotos = await getPhotos(
-            querySearch,
-            nextPage,
-            photosPerPage
+            this.state.querySearch,
+            this.state.page,
+            this.state.photosPerPage
           );
+
+          // WARN: console.log
+          console.log(morePhotos);
 
           this.setState(prevState => ({
             photos: [...prevState.photos, ...morePhotos],
-            page: nextPage,
             isLoading: false,
           }));
-
-          console.log(morePhotos);
-          console.log(morePhotos.length);
         }
       );
     } catch (error) {
       this.setState({ errorMessage: error.message, isLoading: false });
+    } finally {
+      this.setState({
+        isLoading: false,
+      });
     }
   };
 
@@ -87,9 +88,7 @@ export class App extends Component {
         {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
         {!this.state.errorMessage && <ImageGallery data={this.state.photos} />}
         {this.state.photos.length !== 0 && (
-          <Button
-            handleLoadMore={() => this.handleLoadMore(this.state.querySearch)}
-          />
+          <Button handleLoadMore={this.handleLoadMore} />
         )}
       </>
     );
