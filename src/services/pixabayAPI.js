@@ -14,7 +14,7 @@ const createSearchParams = querySearch =>
     per_page: IMG_PER_PAGE,
   });
 
-// FIXME: argumenty do fukcji getPhotos
+// FIXME: check function parameters
 export const getPhotos = async (querySearch, page = 1, photosPerPage = 3) => {
   try {
     const response = await axios.get(API_URL + createSearchParams(querySearch));
