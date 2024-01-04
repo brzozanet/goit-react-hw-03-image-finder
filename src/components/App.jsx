@@ -36,10 +36,6 @@ export class App extends Component {
       this.setState({
         photos,
       });
-
-      // WARN: console.log
-      console.log("photos:");
-      console.log(photos);
     } catch (error) {
       this.setState({ errorMessage: error.message });
     } finally {
@@ -57,6 +53,7 @@ export class App extends Component {
           errorMessage: "",
           page: prevState.page + 1,
         }),
+
         async () => {
           const morePhotos = await getPhotos(
             this.state.querySearch,
