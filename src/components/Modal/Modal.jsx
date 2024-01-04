@@ -7,7 +7,11 @@ export class Modal extends Component {
     return (
       <div className={css.overlay}>
         <div className={css.modal}>
-          <img src={this.props.largeImageURL} alt={this.props.tags} />
+          <img
+            src={this.props.largeImageURL}
+            title={this.props.tags}
+            alt={this.props.tags}
+          />
         </div>
       </div>
     );
