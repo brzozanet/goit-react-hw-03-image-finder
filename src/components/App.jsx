@@ -4,6 +4,7 @@ import { Searchbar } from "./Searchbar/Searchbar";
 import { getPhotos, IMG_PER_PAGE } from "../services/pixabayAPI";
 import { Loader } from "./Loader/Loader";
 import { Button } from "./Button/Button";
+import { Modal } from "./Modal";
 
 export class App extends Component {
   state = {
@@ -11,6 +12,7 @@ export class App extends Component {
     photosPerPage: IMG_PER_PAGE,
     page: 1,
     isLoading: false,
+    isModalVisible: false,
     errorMessage: "",
     querySearch: "",
   };
@@ -36,7 +38,7 @@ export class App extends Component {
       });
 
       // WARN: console.log
-      console.log(querySearch);
+      console.log("photos:");
       console.log(photos);
     } catch (error) {
       this.setState({ errorMessage: error.message });
@@ -58,12 +60,8 @@ export class App extends Component {
         async () => {
           const morePhotos = await getPhotos(
             this.state.querySearch,
-            this.state.page,
-            this.state.photosPerPage
+            this.state.page
           );
-
-          // WARN: console.log
-          console.log(morePhotos);
 
           this.setState(prevState => ({
             photos: [...prevState.photos, ...morePhotos],
@@ -80,6 +78,12 @@ export class App extends Component {
     }
   };
 
+  toggleIsModalVisible = () => {
+    this.setState(prevState => ({
+      isModalVisible: !prevState.isModalVisible,
+    }));
+  };
+
   render() {
     return (
       <>
@@ -89,6 +93,12 @@ export class App extends Component {
         {!this.state.errorMessage && <ImageGallery data={this.state.photos} />}
         {this.state.photos.length !== 0 && (
           <Button handleLoadMore={this.handleLoadMore} />
+        )}
+        {this.state.isModalVisible && (
+          <Modal
+            largeImageURL={this.state.photos[0]?.largeImageURL}
+            tags={this.state.photos[0]?.tags}
+          />
         )}
       </>
     );
