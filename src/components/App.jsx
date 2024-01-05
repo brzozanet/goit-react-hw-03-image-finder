@@ -4,7 +4,6 @@ import { Searchbar } from "./Searchbar/Searchbar";
 import { getPhotos, IMG_PER_PAGE } from "../services/pixabayAPI";
 import { Loader } from "./Loader/Loader";
 import { Button } from "./Button/Button";
-import { Modal } from "./Modal";
 
 export class App extends Component {
   state = {
@@ -75,11 +74,12 @@ export class App extends Component {
     }
   };
 
-  toggleIsModalVisible = () => {
-    this.setState(prevState => ({
-      isModalVisible: !prevState.isModalVisible,
-    }));
-  };
+  // NOTE: toggle funcionality
+  // toggleIsModalVisible = () => {
+  //   this.setState(prevState => ({
+  //     isModalVisible: !prevState.isModalVisible,
+  //   }));
+  // };
 
   render() {
     return (
@@ -91,12 +91,12 @@ export class App extends Component {
         {this.state.photos.length !== 0 && (
           <Button handleLoadMore={this.handleLoadMore} />
         )}
-        {this.state.isModalVisible && (
+        {/* {this.state.isModalVisible && (
           <Modal
             largeImageURL={this.state.photos[0]?.largeImageURL}
             tags={this.state.photos[0]?.tags}
           />
-        )}
+        )} */}
       </>
     );
   }
