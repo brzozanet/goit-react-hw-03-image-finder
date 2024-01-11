@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { ImageGalleryItem } from "components/ImageGalleryItem";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import css from "./ImageGallery.module.css";
 
 export class ImageGallery extends Component {
@@ -12,6 +12,7 @@ export class ImageGallery extends Component {
             key={photo.id}
             imgSrc={photo.webformatURL}
             tags={photo.tags}
+            toggleIsModalVisible={this.props.toggleIsModalVisible}
           />
         ))}
       </ul>
@@ -24,6 +25,6 @@ export class ImageGallery extends Component {
   }
 }
 
-ImageGallery.propTypes = {
-  data: PropTypes.array.isRequired,
-};
+// ImageGallery.propTypes = {
+//   data: PropTypes.array.isRequired,
+// };

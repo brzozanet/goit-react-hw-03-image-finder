@@ -1,5 +1,5 @@
 import { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import css from "./ImageGalleryItem.module.css";
 
 export class ImageGalleryItem extends Component {
@@ -11,6 +11,7 @@ export class ImageGalleryItem extends Component {
           alt={this.props.tags}
           title={this.props.tags}
           className={css.ImageGalleryItemImage}
+          onClick={this.props.toggleIsModalVisible}
         />
       </li>
     );
@@ -21,8 +22,8 @@ export class ImageGalleryItem extends Component {
 //   imgSrc: "https://placehold.co/600x400",
 // };
 
-ImageGalleryItem.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-};
+// ImageGalleryItem.propTypes = {
+//   imgSrc: PropTypes.string.isRequired,
+//   largeImageURL: PropTypes.string.isRequired,
+//   tags: PropTypes.string.isRequired,
+// };

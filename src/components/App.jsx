@@ -4,6 +4,7 @@ import { Searchbar } from "./Searchbar/Searchbar";
 import { getPhotos, IMG_PER_PAGE } from "../services/pixabayAPI";
 import { Loader } from "./Loader/Loader";
 import { Button } from "./Button/Button";
+import { Modal } from "./Modal";
 
 export class App extends Component {
   state = {
@@ -74,12 +75,12 @@ export class App extends Component {
     }
   };
 
-  // NOTE: toggle funcionality
-  // toggleIsModalVisible = () => {
-  //   this.setState(prevState => ({
-  //     isModalVisible: !prevState.isModalVisible,
-  //   }));
-  // };
+  toggleIsModalVisible = () => {
+    console.log("toggle test");
+    this.setState(prevState => ({
+      isModalVisible: !prevState.isModalVisible,
+    }));
+  };
 
   render() {
     return (
@@ -87,16 +88,22 @@ export class App extends Component {
         <Searchbar handleSearch={this.handleSearch} />
         {this.state.isLoading && <Loader />}
         {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
-        {!this.state.errorMessage && <ImageGallery data={this.state.photos} />}
+        {!this.state.errorMessage && (
+          <ImageGallery
+            data={this.state.photos}
+            toggleIsModalVisible={this.toggleIsModalVisible}
+          />
+        )}
         {this.state.photos.length !== 0 && (
           <Button handleLoadMore={this.handleLoadMore} />
         )}
-        {/* {this.state.isModalVisible && (
+        {this.state.isModalVisible && (
           <Modal
             largeImageURL={this.state.photos[0]?.largeImageURL}
             tags={this.state.photos[0]?.tags}
+            toggleIsModalVisible={this.toggleIsModalVisible}
           />
-        )} */}
+        )}
       </>
     );
   }
