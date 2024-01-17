@@ -76,7 +76,6 @@ export class App extends Component {
   };
 
   toggleIsModalVisible = () => {
-    console.log("toggle test");
     this.setState(prevState => ({
       isModalVisible: !prevState.isModalVisible,
     }));

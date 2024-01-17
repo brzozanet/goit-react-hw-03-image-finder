@@ -3,11 +3,34 @@ import { Component } from "react";
 import css from "./Modal.module.css";
 
 export class Modal extends Component {
+  componentDidMount() {
+    // Dodanie obsługi zdarzenia dla naciśnięcia klawisza Esc po zamontowaniu komponentu
+    window.addEventListener("keydown", this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    // Usunięcie obsługi zdarzenia po odmontowaniu komponentu
+    window.removeEventListener("keydown", this.handleKeyDown);
+  }
+
+  handleKeyDown = event => {
+    // Sprawdzenie, czy naciśnięto klawisz Esc
+    if (event.key === "Escape") {
+      this.props.toggleIsModalVisible();
+    }
+  };
+
+  handleOverlayClick = event => {
+    // Sprawdzenie, czy kliknięcie nastąpiło poza obszarem zdjęcia
+    if (event.target === event.currentTarget) {
+      this.props.toggleIsModalVisible();
+    }
+  };
+
   render() {
     return (
       <div className={css.overlay} onClick={this.props.toggleIsModalVisible}>
         <div className={css.modal}>
-          modal test
           <img
             src={this.props.largeImageURL}
             title={this.props.tags}
