@@ -5,7 +5,7 @@ const API_URL = "https://pixabay.com/api/?";
 const API_KEY = "8543283-ac41910cbcd5ccb3a6a09e0db";
 
 // NOTE: IMG_PER_PAGE accepted values: 3-200
-export const IMG_PER_PAGE = 3;
+export const IMG_PER_PAGE = 15;
 
 const createSearchParams = (querySearch, page) =>
   new URLSearchParams({
@@ -33,20 +33,6 @@ export const getPhotos = async (querySearch, page) => {
     console.log(`An error occured: ${error}`);
   }
 };
-
-// NOTE: OLD VERSION
-//
-// export const getPhotos = async (query, imagesPerPage = 15) => {
-//   const url = `${BASE_URL}?q=${query}&key=${API_KEY}&page=${PAGE}&per_page=${imagesPerPage}`;
-//   const response = await axios.get(url);
-//   if (response.data.hits.length === 0) {
-//     Notiflix.Notify.failure(
-//       "Sorry, there are no images matching your search query. Please try again."
-//     );
-//     return [];
-//   }
-//   return response.data.hits;
-// };
 
 // NOTE: DELAY SIMULATION
 //

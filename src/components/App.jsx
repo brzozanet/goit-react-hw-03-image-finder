@@ -33,6 +33,8 @@ export class App extends Component {
         this.state.photosPerPage
       );
 
+      console.log(photos);
+
       this.setState({
         photos,
       });

@@ -1,4 +1,6 @@
 import { IMG_PER_PAGE } from "../../services/pixabayAPI";
+import PropTypes from "prop-types";
+
 import css from "./Button.module.css";
 
 export const Button = ({ handleLoadMore }) => {
@@ -9,4 +11,8 @@ export const Button = ({ handleLoadMore }) => {
       </div>
     </div>
   );
+};
+
+Button.propTypes = {
+  handleLoadMore: PropTypes.func.isRequired,
 };
