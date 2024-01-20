@@ -11,7 +11,10 @@ export class ImageGalleryItem extends Component {
           alt={this.props.tags}
           title={this.props.tags}
           className={css.ImageGalleryItemImage}
-          onClick={this.props.toggleIsModalVisible}
+          onClick={() => {
+            this.props.handleSelectPhoto(this.props.photo);
+            this.props.toggleIsModalVisible(this.props.photo);
+          }}
         />
       </li>
     );

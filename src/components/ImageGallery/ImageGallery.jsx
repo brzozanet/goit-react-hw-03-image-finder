@@ -13,6 +13,8 @@ export class ImageGallery extends Component {
             imgSrc={photo.webformatURL}
             tags={photo.tags}
             largeImageURL={photo.largeImageURL}
+            photo={photo}
+            handleSelectPhoto={this.props.handleSelectPhoto}
             toggleIsModalVisible={this.props.toggleIsModalVisible}
           />
         ))}
@@ -20,7 +22,11 @@ export class ImageGallery extends Component {
     );
     return (
       <>
-        {this.props.data.length === 0 ? <h3>No images found</h3> : imageContent}
+        {this.props.data.length === 0 ? (
+          <h3 className={css.title}>No images found</h3>
+        ) : (
+          imageContent
+        )}
       </>
     );
   }

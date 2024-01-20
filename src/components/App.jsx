@@ -15,6 +15,7 @@ export class App extends Component {
     isModalVisible: false,
     errorMessage: "",
     querySearch: "",
+    selectedPhoto: null,
   };
 
   handleSearch = async querySearch => {
@@ -32,8 +33,6 @@ export class App extends Component {
         this.state.page,
         this.state.photosPerPage
       );
-
-      console.log(photos);
 
       this.setState({
         photos,
@@ -77,9 +76,14 @@ export class App extends Component {
     }
   };
 
-  toggleIsModalVisible = () => {
+  handleSelectPhoto = photo => {
+    this.setState({ selectedPhoto: photo });
+  };
+
+  toggleIsModalVisible = photo => {
     this.setState(prevState => ({
       isModalVisible: !prevState.isModalVisible,
+      selectedPhoto: photo || null,
     }));
   };
 
@@ -92,6 +96,7 @@ export class App extends Component {
         {!this.state.errorMessage && (
           <ImageGallery
             data={this.state.photos}
+            handleSelectPhoto={this.handleSelectPhoto}
             toggleIsModalVisible={this.toggleIsModalVisible}
           />
         )}
@@ -100,8 +105,8 @@ export class App extends Component {
         )}
         {this.state.isModalVisible && (
           <Modal
-            largeImageURL={this.state.photos[0]?.largeImageURL}
-            tags={this.state.photos[0]?.tags}
+            largeImageURL={this.state.selectedPhoto?.largeImageURL}
+            tags={this.state.selectedPhoto?.tags}
             toggleIsModalVisible={this.toggleIsModalVisible}
           />
         )}
