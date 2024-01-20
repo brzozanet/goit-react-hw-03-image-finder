@@ -44,6 +44,6 @@ export class Modal extends Component {
 
 Modal.propTypes = {
   toggleIsModalVisible: PropTypes.func.isRequired,
-  // largeImageURL: PropTypes.string.isRequired,
-  // tags: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
 };
