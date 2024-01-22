@@ -28,4 +28,8 @@ export class ImageGalleryItem extends Component {
 ImageGalleryItem.propTypes = {
   imgSrc: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  photo: PropTypes.object.isRequired,
+  handleSelectPhoto: PropTypes.func.isRequired,
+  toggleIsModalVisible: PropTypes.func.isRequired,
 };
